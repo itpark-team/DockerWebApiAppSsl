@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  nginx:
+    build: ./nginxapp
+    restart: always
+    volumes:
+      - ./nginxapp/www/:/home/web/www
+    ports:
+      - "80:80"
+      - "443:443"
+
+  app:
+    build: ./aspapp
+    depends_on:
+      - nginx
+    # command: sh -c "dotnet WebApplicationTestDocker.dll"
+    # volumes:
+    #   - ./apsapp/code:/root
